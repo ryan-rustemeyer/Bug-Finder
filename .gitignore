@@ -1,0 +1,36 @@
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Dependencies 
+node_modules/
+
+# VS Code
+.vscode/
+.history/
+.history
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Universal
+# Log files
+*.log
+
+# Temporary and backup files
+*.tmp
+*~
+*.bak
+
+# Local configuration
+*.local
+
+# JavaScript logs
+npm-debug.log*
+yarn-debug.log*
+
+# Caches
+.cache/

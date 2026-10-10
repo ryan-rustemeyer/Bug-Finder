@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Homepage</title>
+        <link rel="stylesheet" href="styles.css" />
+        <script src="find-coordinates.js" defer></script>
+        <!-- download js now, but dont run until html loaded -->
+    </head>
+
+    <body>
+        <h1>🐛Bug Finder🐛</h1>
+
+        <div class="place-container">
+            <div class="zipcode">
+                <label>Enter ZIP/Postal Code: </label>
+                <input id="postalCode" type="text" placeholder="e.g. 65101" />
+            </div>
+
+            <div class="country-code">
+                <label>Select Country: </label>
+                <select id="country" required>
+                    <option value="" disabled selected hidden>Select a Country</option>
+                    <option value="us">United States</option>
+                    <option value="ca">Canada</option>
+                    <option value="gb">United Kingdom</option>
+                    <option value="de">Germany</option>
+                    <option value="fr">France</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="find-container">
+            <button id="find-bugs" type="submit">FIND</button>
+        </div>
+    </body>
+</html>

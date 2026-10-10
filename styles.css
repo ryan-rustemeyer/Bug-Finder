@@ -1,0 +1,350 @@
+/* General web styles + variables */
+:root {
+    --bg-color: #daffe6;
+
+    --button-color: #4ac65d;
+    --button-border: 1px solid #277232;
+    --button-shadow: 4px 4px #277232;
+    --button-radius: 16px;
+    --button-weight: 700;
+
+    --dark-green-color: #277232;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+    font-family: "Courier New", Courier, monospace;
+}
+
+body {
+    background-color: var(--bg-color);
+    justify-content: center;
+    align-content: center;
+}
+
+/* Homepage styles */
+
+h1 {
+    text-align: center;
+    font-size: 50px;
+    margin-top: 70px;
+}
+
+.container {
+    margin: 20px;
+}
+
+.zipcode,
+.find-container,
+.country-code {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+button,
+input,
+select {
+    transition: transform 0.2s ease;
+}
+
+button:hover,
+input:hover,
+select:hover {
+    transform: scale(1.03);
+}
+
+input:focus,
+select:focus {
+    outline: none;
+}
+
+.zipcode {
+    margin-top: 60px;
+}
+.country-code {
+    margin-top: 25px;
+}
+
+.place-container {
+    padding: 30px;
+}
+
+input,
+select {
+    min-width: 225px;
+    min-height: 40px;
+    max-height: 50px;
+
+    border-radius: 8px;
+    border: 1px solid black;
+    field-sizing: content;
+
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: 10px;
+
+    font-size: 20px;
+    font-weight: 700;
+}
+
+#postalCode {
+    margin-top: 15px;
+}
+
+select option {
+    font-size: 20px;
+    font-weight: 700;
+    color: black;
+}
+
+label {
+    font-size: 25px;
+    font-weight: 950;
+    margin-right: 0px;
+    align-content: center;
+}
+
+select:invalid {
+    color: gray;
+}
+
+#find-bugs {
+    min-width: 260px;
+    text-align: center;
+
+    font-size: 35px;
+    font-weight: var(--button-weight);
+    color: white;
+
+    background-color: var(--button-color);
+    border: var(--button-border);
+    box-shadow: var(--button-shadow);
+    border-radius: var(--button-radius);
+
+    margin-top: 60px;
+    margin-bottom: 90px;
+    padding: 15px;
+}
+
+/* Results Page */
+header {
+    display: flex;
+    justify-content: space-between;
+}
+.results-title {
+    text-align: center;
+    font-size: 60px;
+    margin-top: 0px;
+}
+
+.home-button,
+#refresh-bugs {
+    min-width: 100px;
+
+    background-color: var(--button-color);
+    border: var(--button-border);
+    box-shadow: var(--button-shadow);
+    border-radius: var(--button-radius);
+    font-weight: var(--button-weight);
+
+    color: white;
+    font-size: 20px;
+
+    padding: 15px;
+    margin: 30px;
+    margin-bottom: 30px;
+}
+
+.loc-area {
+    max-width: 1000px;
+    font-size: 30px;
+    color: black;
+
+    display: flex;
+
+    margin-top: 90px;
+    margin-left: 50px;
+    padding: 10px;
+}
+
+#bug-results {
+    max-width: 1000px;
+
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 30px;
+
+    align-items: stretch;
+    align-content: center;
+    justify-items: center;
+
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.bug-card h3 a {
+    color: white;
+    text-decoration: none;
+}
+
+.bug-card h3 a:hover {
+    text-decoration: underline;
+}
+
+.bug-card {
+    width: 300px;
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+
+    text-align: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.bug-card img {
+    width: 100%;
+    height: 250px;
+
+    display: block;
+    object-fit: cover;
+    object-position: 50% 40%;
+    border-radius: 8px;
+}
+
+.bug-info {
+    height: 300px;
+    background-color: #1e571a;
+    scrollbar-color: #22a10e #0e370ac7;
+
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    overflow-y: auto;
+}
+
+.bug-header {
+    width: 100%;
+    height: 350px;
+    background-color: #1f910e;
+
+    display: flex;
+    flex-direction: column;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+
+    padding: 10px 10px 0px 10px;
+    justify-content: flex-start;
+    align-items: center;
+}
+.bug-card h3 a {
+    width: 100%;
+    height: 90px;
+
+    font-size: 25px;
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 15px; 
+}
+.bug-card h3 a, #bug-results p{
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+#bug-results p {
+    font-size: 20px;
+    font-weight: 600;
+    color: #e6ffea;
+    line-height: 1.6;
+    margin: 20px;
+    
+}
+
+#info-popup {
+    width: 100%;
+    height: 100%;
+    background-color: #00000080;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    position: relative;
+    background-color: white;
+
+    text-align: center;
+    font-size: 25px;
+    font-weight: 550;
+
+    border-radius: 10px;
+    box-shadow: 0 5px 15px #0000004d;
+
+    padding: 70px 80px;
+    margin: 20px;
+}
+
+#close-popup {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+
+    border: none;
+    background: none;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+/* Media queries  */
+@media (min-width: 640px) {
+    #bug-results {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 80px;
+        margin-top: 80px;
+    }
+
+    select,
+    input {
+        height: 50px;
+        border-radius: 8px;
+        font-weight: 900;
+    }
+
+    label {
+        font-size: 30px;
+        margin-right: 20px;
+        align-content: center;
+        font-weight: 700;
+    }
+
+    #postalCode {
+        margin-top: 0px;
+    }
+    .country-code {
+        margin-top: 35px;
+    }
+}
+
+
+@media (min-width: 1024px) {
+    #bug-results {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

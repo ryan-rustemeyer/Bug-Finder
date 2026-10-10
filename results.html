@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Homepage</title>
+        <link rel="stylesheet" href="styles.css" />
+        <script src="results.js" defer></script>
+    </head>
+
+    <body>
+        <header>
+            <a href="index.html">
+                <button class="home-button" type="submit">Home</button>
+            </a>
+            <button id="refresh-bugs" type="submit">Refresh</button>
+        </header>
+
+        <div id="info-popup">
+            <div class="popup-content">
+                <button id="close-popup">&times;</button>
+                <!-- &times; is a multiplication sign to close popup-->
+                <p>🐛 Click a bug name to learn more! 🐛</p>
+            </div>
+        </div>
+
+        <h1 class="results-title">🐛Bug Finder Results🐛</h1>
+
+        <div id="bug-container">
+            <div id="bug-results"></div>
+        </div>
+    </body>
+</html>
