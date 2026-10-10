@@ -2,6 +2,8 @@
 
 Bug Finder is a web application that helps users discover insects in their area. Users enter a postal or ZIP code and select a country to explore local insect observations.
 
+**[View the live demo](https://bug-finder-blush.vercel.app/)**
+
 ## Features
 
 - Search for insects using a ZIP or postal code
