@@ -42,12 +42,9 @@ async function getInsects(latitude, longitude, page = 1) {
     return data.results;
 }
 
-
 async function displayInsects(insectsArray) {
-    //retrieve bug results already there (for refreshing)
+    //retrieve and clear out bug results already there (for refreshing)
     const bugResults = document.getElementById("bug-results");
-
-    //clear out previous bug results (for refreshing)
     bugResults.innerHTML = "";
 
     const seenSpecies = new Set();
@@ -65,8 +62,6 @@ async function displayInsects(insectsArray) {
     })
     .slice(0, 9);
 
-
-    //display zipcode where insects are near 
     const params = new URLSearchParams(window.location.search);
     const postalCode = params.get("zip");
 
@@ -76,9 +71,7 @@ async function displayInsects(insectsArray) {
         bugLoc.textContent = `Insects near: ${postalCode}`;
         document.getElementById("bug-container").prepend(bugLoc);
     }
-   
 
-    //retrieve all wikipedia summaries at once 
     const wikiResults = await Promise.all(
         uniqueInsects.map(function (insect) {
             return getWiki(insect.species_guess);
@@ -102,14 +95,14 @@ async function displayInsects(insectsArray) {
 
         const key = sumKey.key;
 
-        //link to the wikipedia page for the user to learn more 
+        //link to the wikipedia page for the user to learn more
         wikiLink.href = `https://en.wikipedia.org/wiki/${encodeURIComponent(key)}`;
         wikiLink.target = "_blank";
 
         bugName.appendChild(wikiLink);
 
+        //the original images are small and pixelated, make them bigger
         const image = document.createElement("img");
-        //the original images are really small and pixelated, make them bigger
         image.src = insect.photos[0].url.replace("square.jpg", "medium.jpg");
         image.alt = insect.species_guess;
 
@@ -132,39 +125,11 @@ async function displayInsects(insectsArray) {
     }
 }
 
-//loading insect results on web page
-async function loadResults() {
-
-    const params = new URLSearchParams(window.location.search);
-    const latitude = Number(params.get("lat"));
-    const longitude = Number(params.get("lon"));
-    const insectsArray = await getInsects(latitude, longitude);
-
-    displayInsects(insectsArray);
-}
-
-loadResults();
-
-async function handleRefresh() {
-    //next page of bugs
-    currentPage++;
-    const params = new URLSearchParams(window.location.search);
-    const latitude = Number(params.get("lat"));
-    const longitude = Number(params.get("lon"));
-    //new retrieval
-    const moreInsects = await getInsects(latitude, longitude, currentPage);
-    //new display
-    displayInsects(moreInsects);
-}
-
-const element = document.getElementById("refresh-bugs");
-element.addEventListener("click", handleRefresh);
-
 async function getWiki(speciesName) {
-    //search for a wikipedia page about the insect 
+    //search for a wikipedia page about the insect
     let url = "https://en.wikipedia.org/w/rest.php/v1/search/page";
     let headers = {
-        "Api-User-Agent": "MediaWiki REST API docs examples/0.1 (https://www.mediawiki.org/wiki/API_talk:REST_API)",
+        "Api-User-Agent": "Bug Finder",
     };
     let params = {
         q: `${speciesName}`,
@@ -191,7 +156,7 @@ async function getWiki(speciesName) {
 }
 
 async function getSummary(key) {
-    //get the summary about the insect from the wikipedia page 
+    //get the summary about the insect from the wikipedia page
     let url = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(key)}`;
 
     const response = await fetch(url);
@@ -199,18 +164,15 @@ async function getSummary(key) {
 
     const fullSummary = data.extract;
 
-    //segmenter doesn't know how to handle bullet points
-    //cut off so there isn't weird spacing or structure
+    /* segmenter doesn't know how to handle bullet points,
+    cut off at : so there isn't weird spacing or structure */
     const intro = fullSummary.split(":")[0];
 
-    //segmenter recognizes when it's the end of a sentence
-    //and not a period used for other functions
     const segmenter = new Intl.Segmenter("en", {
         granularity: "sentence",
     });
     const sentences = [...segmenter.segment(intro)];
 
-    //A small, 2 sentence summary so the user isn't overwhelmed with information
     const smallSummary = sentences
     .slice(0, 2)
     .map((sentence) => sentence.segment)
@@ -218,3 +180,28 @@ async function getSummary(key) {
 
     return smallSummary;
 }
+
+async function loadResults() {
+    const params = new URLSearchParams(window.location.search);
+    const latitude = Number(params.get("lat"));
+    const longitude = Number(params.get("lon"));
+    const insectsArray = await getInsects(latitude, longitude);
+
+    displayInsects(insectsArray);
+}
+
+async function handleRefresh() {
+    //next page of bugs
+    currentPage++;
+    const params = new URLSearchParams(window.location.search);
+    const latitude = Number(params.get("lat"));
+    const longitude = Number(params.get("lon"));
+    //new retrieval
+    const moreInsects = await getInsects(latitude, longitude, currentPage);
+    //new display
+    displayInsects(moreInsects);
+}
+
+loadResults();
+const element = document.getElementById("refresh-bugs");
+element.addEventListener("click", handleRefresh);

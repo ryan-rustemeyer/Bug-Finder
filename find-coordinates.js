@@ -18,7 +18,7 @@ async function getCoordinates(countryCode, postalCode) {
 }
 
 async function handleFind() {
-    const country = document.getElementById("country").value; /* get values by Id*/
+    const country = document.getElementById("country").value; 
     const postalCode = document.getElementById("postalCode").value;
     try {
         const location = await getCoordinates(country, postalCode);
